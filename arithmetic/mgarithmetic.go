@@ -108,5 +108,12 @@ func main() {
 		fmt.Println()
 	}
 
-	walk(maze, point{0, 0}, point{len(maze) - 1, len(maze[0]) - 1})
+	steps := walk(maze, point{0, 0}, point{len(maze) - 1, len(maze[0]) - 1})
+
+	for _, row := range steps {
+		for _, val := range row {
+			fmt.Printf("%3d", val)
+		}
+		fmt.Println()
+	}
 }
