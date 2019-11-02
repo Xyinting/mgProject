@@ -40,7 +40,7 @@ func processCity(bytes []byte) {
 		//	fmt.Printf("%s ", submatch)
 		//}
 
-		fmt.Printf("City: %s, URL: %s", m[1], m[2])
+		fmt.Printf("City: %s, URL: %s", m[2], m[1])
 		fmt.Println()
 	}
 
