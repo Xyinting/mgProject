@@ -23,6 +23,8 @@ func CityListParser(content []byte) engine.RequestResult {
 				Url:       string(m[1]),
 				ParseFunc: CityParser,
 			})
+
+		break
 	}
 
 	return result

@@ -19,8 +19,10 @@ func CityParser(content []byte) engine.RequestResult {
 		result.Items = append(result.Items, string(m[2]))
 		result.Requests = append(result.Requests, engine.Request{
 			Url:       string(m[1]),
-			ParseFunc: engine.NilParser,
+			ParseFunc: PersonParser,
 		})
+
+		break
 	}
 
 	return result
