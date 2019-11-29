@@ -1,9 +1,9 @@
 package main
 
 import (
-	"crawler/engine"
-	"crawler/zhenghun/parser"
 	"fmt"
+	"myproject/crawler/engine"
+	"myproject/crawler/zhenghun/parser"
 	"regexp"
 )
 
