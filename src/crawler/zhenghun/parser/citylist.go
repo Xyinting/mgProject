@@ -13,10 +13,11 @@ func CityListParser(content []byte) engine.RequestResult {
 
 	matches := match.FindAllSubmatch(content, -1)
 
+	limit := 0
 	result := engine.RequestResult{}
 	for _, m := range matches {
 
-		result.Items = append(result.Items, string(m[2]))
+		result.Items = append(result.Items, "City: "+string(m[2]))
 
 		result.Requests = append(result.Requests,
 			engine.Request{
@@ -24,7 +25,11 @@ func CityListParser(content []byte) engine.RequestResult {
 				ParseFunc: CityParser,
 			})
 
-		break
+		if limit > 10 {
+			break
+		}
+
+		limit++
 	}
 
 	return result

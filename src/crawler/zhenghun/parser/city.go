@@ -15,14 +15,14 @@ func CityParser(content []byte) engine.RequestResult {
 
 	result := engine.RequestResult{}
 	for _, m := range matchs {
-
-		result.Items = append(result.Items, string(m[2]))
+		var name = string(m[2])
+		result.Items = append(result.Items, "User: "+name)
 		result.Requests = append(result.Requests, engine.Request{
-			Url:       string(m[1]),
-			ParseFunc: PersonParser,
+			Url: string(m[1]),
+			ParseFunc: func(c []byte) engine.RequestResult {
+				return PersonParser(c, name)
+			},
 		})
-
-		break
 	}
 
 	return result

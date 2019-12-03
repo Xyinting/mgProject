@@ -2,25 +2,28 @@ package parser
 
 import (
 	"myproject/crawler/engine"
+	"myproject/crawler/model"
 	"regexp"
 )
 
 const infoRegx = `<div class="m-btn purple"[^>]*>([^<]*)</div>`
 
-func PersonParser(content []byte) engine.RequestResult {
+func PersonParser(content []byte, name string) engine.RequestResult {
+
+	profile := model.Profile{}
+	profile.Name = name
+	var info []string
 
 	regex := regexp.MustCompile(infoRegx)
 	matches := regex.FindAllSubmatch(content, -1)
 
-	result := engine.RequestResult{}
 	for _, m := range matches {
+		info = append(info, string(m[1]))
+	}
+	profile.PersonalInfo = info
 
-		result.Items = append(result.Items, m[1])
-		result.Requests = append(result.Requests,
-			engine.Request{
-				Url:       "",
-				ParseFunc: engine.NilParser,
-			})
+	result := engine.RequestResult{
+		Items: []interface{}{profile},
 	}
 
 	return result

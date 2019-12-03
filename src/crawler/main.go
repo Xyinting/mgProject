@@ -3,16 +3,25 @@ package main
 import (
 	"fmt"
 	"myproject/crawler/engine"
+	"myproject/crawler/scheduler"
 	"myproject/crawler/zhenghun/parser"
 	"regexp"
 )
 
 func main() {
 
-	engine.SimpleEngine{}.Run(engine.Request{
+	var e = engine.ConcurrentEngine{
+		Scheduler: &scheduler.SimpleScheduler{},
+		WorkCount: 100,
+	}
+	e.Run(engine.Request{
 		Url:       "http://www.zhenai.com/zhenghun",
 		ParseFunc: parser.CityListParser,
 	})
+	//engine.SimpleEngine{}.Run(engine.Request{
+	//	Url:       "http://www.zhenai.com/zhenghun",
+	//	ParseFunc: parser.CityListParser,
+	//})
 
 	//resp, err := http.Get("http://www.zhenai.com/zhenghun")
 	//
