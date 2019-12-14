@@ -11,7 +11,7 @@ import (
 func main() {
 
 	var e = engine.ConcurrentEngine{
-		Scheduler: &scheduler.SimpleScheduler{},
+		Scheduler: &scheduler.QueuedScheduler{},
 		WorkCount: 100,
 	}
 	e.Run(engine.Request{

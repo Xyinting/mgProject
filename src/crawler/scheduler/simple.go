@@ -3,13 +3,20 @@ package scheduler
 import "myproject/crawler/engine"
 
 type SimpleScheduler struct {
-	WorkChan chan engine.Request
+	WorkerChan chan engine.Request
 }
 
-func (s *SimpleScheduler) ConfigMasterWorkChan(c chan engine.Request) {
-	s.WorkChan = c
+func (s *SimpleScheduler) WorkChan() chan engine.Request {
+	return s.WorkerChan
+}
+
+func (s *SimpleScheduler) WorkReady(chan engine.Request) {
+}
+
+func (s *SimpleScheduler) Run() {
+	s.WorkerChan = make(chan engine.Request)
 }
 
 func (s *SimpleScheduler) Submit(r engine.Request) {
-	go func() { s.WorkChan <- r }()
+	go func() { s.WorkerChan <- r }()
 }
